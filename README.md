@@ -5,3 +5,4 @@ This is a company profile.
 ## Members
 
 - Ahmad Muwaffaq
+- Aditya Wardana
