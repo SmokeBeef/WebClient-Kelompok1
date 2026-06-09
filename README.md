@@ -5,4 +5,5 @@ This is a company profile.
 ## Members
 
 - Ahmad Muwaffaq
+- Anggi Debia Zahra
 - Aditya Wardana
