@@ -1,0 +1,10 @@
+{
+  "name": "nexus",
+  "workspaces": [
+    "cms",
+    "web"
+  ],
+  "scripts": {
+    "test": "echo hello"
+  }
+}
