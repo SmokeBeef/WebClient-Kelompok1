@@ -1,16 +1,12 @@
-/**
- * Strapi URL helpers
- */
-
-const DEFAULT_STRAPI_URL = 'http://localhost:1337'
+import { env } from '#/env'
 
 // Base Strapi URL (without /api)
 export function getStrapiURL(): string {
   // Handle SSR where import.meta.env might not be fully available
   if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_STRAPI_URL) {
-    return import.meta.env.VITE_STRAPI_URL
+    return env.VITE_STRAPI_URL
   }
-  return DEFAULT_STRAPI_URL
+  return env.STRAPI_URL
 }
 
 // Get full URL for media assets
@@ -24,6 +20,6 @@ export function getStrapiMedia(url: string | undefined | null): string {
     return url
   }
   // Ensure we always have a valid base URL
-  const baseUrl = getStrapiURL() || DEFAULT_STRAPI_URL
+  const baseUrl = getStrapiURL()
   return `${baseUrl}${url.startsWith('/') ? '' : '/'}${url}`
 }
