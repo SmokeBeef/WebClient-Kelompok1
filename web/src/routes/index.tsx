@@ -1,14 +1,27 @@
+// web/src/routes/index.tsx
 import { createFileRoute } from '@tanstack/react-router'
+import { Navbar } from '../components/Navbar'
+import { Hero } from '../components/Hero'
+import { About } from '../components/About'
+import { Services } from '../components/Services'
+import { Portfolio } from '../components/Portfolio'
+import { Contact } from '../components/Contact'
+import { Footer } from '../components/Footer'
 
-export const Route = createFileRoute('/')({ component: Home })
+export const Route = createFileRoute('/')({
+  component: Index,
+})
 
-function Home() {
+function Index() {
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
+    <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-white">
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <Portfolio />
+      <Contact />
+      <Footer />
     </div>
   )
 }

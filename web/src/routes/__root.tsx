@@ -3,6 +3,8 @@ import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 
 import appCss from '../styles.css?url'
+import varsCss from '../css/vars.css?url'
+import figmaCss from '../css/style.css?url'
 
 export const Route = createRootRoute({
   head: () => ({
@@ -22,6 +24,15 @@ export const Route = createRootRoute({
       {
         rel: 'stylesheet',
         href: appCss,
+      },
+      // 2. Daftarkan file CSS kamu ke dalam tag <link> HTML
+      {
+        rel: 'stylesheet',
+        href: varsCss,
+      },
+      {
+        rel: 'stylesheet',
+        href: figmaCss,
       },
     ],
   }),
