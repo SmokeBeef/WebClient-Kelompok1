@@ -23,6 +23,13 @@
       "relation": "manyToMany",
       "target": "api::blog-category.blog-category",
       "mappedBy": "blogs"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }
