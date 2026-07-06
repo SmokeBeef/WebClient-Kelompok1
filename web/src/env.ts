@@ -4,6 +4,7 @@ import { z } from "zod";
 export const env = createEnv({
   server: {
     STRAPI_URL: z.url().default("http://localhost:1338"),
+    STRAPI_DEPLOYED_URL: z.url().default("http://localhost:1338"),
     STRAPI_API_TOKEN: z.string()
   },
 
@@ -14,6 +15,7 @@ export const env = createEnv({
   clientPrefix: "VITE_",
   client: {
     VITE_STRAPI_URL: z.url().default("http://localhost:1338"),
+    VITE_STRAPI_DEPLOYED_URL: z.url().default("http://localhost:1338"),
   },
 
   /**
@@ -23,8 +25,10 @@ export const env = createEnv({
   // runtimeEnv: import.meta.env,
   runtimeEnvStrict: {
     STRAPI_URL: process.env.STRAPI_URL,
+    STRAPI_DEPLOYED_URL: process.env.STRAPI_DEPLOYED_URL,
     STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,
     VITE_STRAPI_URL: import.meta.env.VITE_STRAPI_URL,
+    VITE_STRAPI_DEPLOYED_URL: import.meta.env.VITE_STRAPI_DEPLOYED_URL,
   },
 
   /**

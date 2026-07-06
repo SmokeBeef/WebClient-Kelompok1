@@ -1,3 +1,5 @@
+import { Link } from "@tanstack/react-router";
+
 // web/src/components/Footer.tsx
 export const Footer = () => {
   return (
@@ -22,10 +24,10 @@ export const Footer = () => {
           <div>
             <h4 className="text-base font-bold text-white">Company</h4>
             <ul className="mt-6 flex flex-col gap-4 text-sm font-medium">
-              <li><a href="#" className="transition-colors hover:text-white">About Us</a></li>
+              <li><Link to="/about" className="transition-colors hover:text-white">About Us</Link></li>
               <li><a href="#" className="transition-colors hover:text-white">Careers</a></li>
               <li><a href="#" className="transition-colors hover:text-white">News</a></li>
-              <li><a href="#" className="transition-colors hover:text-white">Contact</a></li>
+              <li><Link to="/contact" className="transition-colors hover:text-white">Contact</Link></li>
             </ul>
           </div>
 

@@ -71,7 +71,7 @@ function RouteComponent() {
   }
 
   return (
-    <section className="container mx-auto px-4 py-12 sm:py-16 lg:py-24">
+    <section className="container mx-auto px-4 py-12 sm:py-16 lg:py-24 grow">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-3">

@@ -4,7 +4,7 @@ import { MarkdownContent } from '@/components/markdown-content'
 import { StrapiImage } from '@/components/strapi-image'
 import { strapiApi } from '@/data/loaders'
 
-export const Route = createFileRoute('/blog/$slug')({
+export const Route = createFileRoute('/blog_/$slug')({
   loader: async ({ params }) => {
     const response = await strapiApi.blogs.getBlogBySlugData({
       data: params.slug,
