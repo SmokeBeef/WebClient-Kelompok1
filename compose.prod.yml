@@ -6,6 +6,8 @@ services:
       dockerfile: ./web/Dockerfile.prod
       args:
         VITE_STRAPI_URL: ${VITE_STRAPI_URL:-http://strapi:1337}
+        STRAPI_URL: ${STRAPI_URL:-http://strapi:1337}
+        STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:-here-you-go}
     image: web:latest
     restart: always
     environment:

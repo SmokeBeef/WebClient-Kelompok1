@@ -14,8 +14,12 @@ COPY . .
 
 # Baked into the client bundle at build time; override for your public Strapi URL in production.
 ARG VITE_STRAPI_URL=http://strapi:1337
+ARG STRAPI_URL=http://strapi:1337
+ARG STRAPI_API_TOKEN=here-you-go
 ENV VITE_STRAPI_URL=${VITE_STRAPI_URL}
 ENV NODE_ENV=production
+ENV STRAPI_URL=${STRAPI_URL}
+ENV STRAPI_API_TOKEN=${STRAPI_API_TOKEN}
 
 WORKDIR /opt/app/web
 RUN npm run build
