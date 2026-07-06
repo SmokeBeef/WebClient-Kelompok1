@@ -14,6 +14,9 @@ services:
       NODE_ENV: production
       HOST: 0.0.0.0
       PORT: 3030
+      VITE_STRAPI_URL: ${VITE_STRAPI_URL:-http://strapi:1337}
+      STRAPI_URL: ${STRAPI_URL:-http://strapi:1337}
+      STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:-here-you-go}
     ports:
       - "127.0.0.1:3030:3030"
     networks:
