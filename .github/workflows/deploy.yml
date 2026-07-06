@@ -20,14 +20,20 @@ jobs:
           echo "${{ secrets.ENV_CMS }}" > ./cms/.env
 
           # Compose interpolates ${DATABASE_*} for the Postgres service from a project .env file.
-          grep -E '^DATABASE_' ./cms/.env > .env
+          # grep -E '^DATABASE_' ./cms/.env > .env
+          echo "${{ secrets.ENV_GLOBAL }}" > .env
 
       - name: Build docker images
         env:
           VITE_STRAPI_URL: ${{ secrets.VITE_STRAPI_URL }}
+          STRAPI_URL: ${{ secrets.STRAPI_URL }}
+          STRAPI_API_TOKEN: ${{ secrets.STRAPI_API_TOKEN }}
         run: |
           docker build -t web:latest -f web/Dockerfile.prod \
-            --build-arg VITE_STRAPI_URL="${VITE_STRAPI_URL:-http://strapi:1337}" .
+            --build-arg VITE_STRAPI_URL="${VITE_STRAPI_URL:-http://strapi:1337}" \
+            --build-arg STRAPI_URL="${STRAPI_URL:-http://strapi:1337}" \
+            --build-arg STRAPI_API_TOKEN="${STRAPI_API_TOKEN:-here-you-go}" \
+            .
           docker build -t strapi:latest -f cms/Dockerfile.prod .
 
       - name: Save docker images to tarball

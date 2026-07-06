@@ -58,7 +58,7 @@
   flex-shrink: 0;
   position: relative;
 }
-.container {
+/* .container {
   padding: 0px 16px 0px 16px;
   display: flex;
   flex-direction: row;
@@ -69,7 +69,7 @@
   height: 64px;
   max-width: 1280px;
   position: relative;
-}
+} */
 .container2 {
   display: flex;
   flex-direction: row;

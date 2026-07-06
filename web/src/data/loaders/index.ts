@@ -1,28 +1,32 @@
-import {
-  getArticlesData,
-  getArticleByIdData,
-  getArticleBySlugData,
-} from './articles'
+import { getBlogCategoriesData } from './blog-categories'
+import { getBlogBySlugData, getBlogsData } from './blogs'
+import { submitContactFormData } from './contact-forms'
+import { getPortfolioCategoriesData } from './portfolio-categories'
+import { getPortfolioBySlugData, getPortfoliosData } from './portfolios'
+import { getServicesData } from './services'
 
 /**
  * Strapi API - Server functions for fetching data from Strapi
- *
- * Usage in route loaders:
- * ```ts
- * import { strapiApi } from "@/data/loaders";
- *
- * export const Route = createFileRoute("/articles")({
- *   loader: async () => {
- *     const { data, meta } = await strapiApi.articles.getArticlesData();
- *     return data;
- *   },
- * });
- * ```
  */
 export const strapiApi = {
-  articles: {
-    getArticlesData,
-    getArticleByIdData,
-    getArticleBySlugData,
+  blogs: {
+    getBlogsData,
+    getBlogBySlugData,
+  },
+  blogCategories: {
+    getBlogCategoriesData,
+  },
+  portfolios: {
+    getPortfoliosData,
+    getPortfolioBySlugData,
+  },
+  portfolioCategories: {
+    getPortfolioCategoriesData,
+  },
+  services: {
+    getServicesData,
+  },
+  contactForms: {
+    submitContactFormData,
   },
 }

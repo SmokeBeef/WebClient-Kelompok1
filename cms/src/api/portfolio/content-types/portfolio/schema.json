@@ -22,6 +22,18 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::portfolio-category.portfolio-category"
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     }
   }
 }
