@@ -1,11 +1,7 @@
 /**
- * Strapi type definitions
- * These types match the Strapi Cloud Template Blog schema
+ * Strapi type definitions matching the CMS collections
  */
 
-import type { Block } from '@/components/blocks'
-
-// Base image type from Strapi media library
 export type TImage = {
   id: number
   documentId: string
@@ -13,46 +9,77 @@ export type TImage = {
   url: string
 }
 
-// Author content type
-export type TAuthor = {
+export type TBlogCategory = {
   id: number
   documentId: string
   name: string
-  email?: string
   createdAt: string
   updatedAt: string
   publishedAt: string
 }
 
-// Category content type
-export type TCategory = {
-  id: number
-  documentId: string
-  name: string
-  slug: string
-  description?: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
-}
-
-// Article content type
-export type TArticle = {
+export type TBlog = {
   id: number
   documentId: string
   title: string
-  description: string
   slug: string
-  cover?: TImage
-  author?: TAuthor
-  category?: TCategory
-  blocks?: Array<Block>
+  content?: string
+  thumbnail?: TImage
+  blog_categories?: TBlogCategory[]
   createdAt: string
   updatedAt: string
   publishedAt: string
 }
 
-// Strapi response wrappers
+export type TPortfolioCategory = {
+  id: number
+  documentId: string
+  name: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export type TPortfolio = {
+  id: number
+  documentId: string
+  title: string
+  slug: string
+  content?: string
+  thumbnail?: TImage
+  portfolio_category?: TPortfolioCategory | null
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export type TService = {
+  id: number
+  documentId: string
+  title: string
+  short_description: string
+  content?: string
+  thumbnail?: TImage
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
+export type TContactFormInput = {
+  first_name: string
+  last_name?: string
+  email: string
+  message: string
+}
+
+export type TContactForm = TContactFormInput & {
+  id: number
+  documentId: string
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+}
+
 export type TStrapiResponseSingle<T> = {
   data: T
   meta?: {

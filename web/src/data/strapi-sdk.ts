@@ -1,10 +1,10 @@
-import { strapi } from '@strapi/client'
-import { env } from '#/env'
-
-// Strapi base URL (without /api)
-const STRAPI_BASE = env.STRAPI_URL
+import { strapi } from "@strapi/client";
+import { env } from "#/env";
 
 // Initialize the Strapi SDK with /api endpoint
-const sdk = strapi({ baseURL: new URL('/api', STRAPI_BASE).href })
+const sdk = strapi({
+  baseURL: new URL("/api", env.STRAPI_URL).href,
+  auth: env.STRAPI_API_TOKEN,
+});
 
-export { sdk }
+export { sdk };
