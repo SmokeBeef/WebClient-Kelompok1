@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { StrapiImage } from '@/components/strapi-image'
 import type { TService } from '@/types/strapi'
 
@@ -27,38 +28,62 @@ export const Services = ({ services, showHeader = true }: ServicesProps) => {
             </p>
           </div>
         )}
-
-        <div className={showHeader ? 'mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3' : 'grid gap-8 sm:grid-cols-2 lg:grid-cols-3'}>
+        <div
+          className={
+            showHeader
+              ? 'mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3'
+              : 'grid gap-8 sm:grid-cols-2 lg:grid-cols-3'
+          }
+        >
           {services.map((service) => (
-            <div
-              key={service.documentId}
-              className="flex flex-col items-start rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md"
-            >
-              <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-indigo-100/80">
-                {service.thumbnail ? (
-                  <StrapiImage
-                    src={service.thumbnail.url}
-                    alt={service.thumbnail.alternativeText || service.title}
-                    className="h-full w-full object-cover"
-                  />
-                ) : (
-                  <img
-                    className="h-7 w-7"
-                    src={defaultIcon}
-                    alt={service.title}
-                  />
-                )}
-              </div>
-              <h3 className="mt-6 text-xl font-bold text-slate-900">
-                {service.title}
-              </h3>
-              <p className="mt-3 leading-relaxed text-slate-600">
-                {service.short_description}
-              </p>
-            </div>
+            <ServiceCard key={service.documentId} service={service} />
           ))}
         </div>
       </div>
     </section>
+  )
+}
+
+const ServiceCard = ({ service }: { service: TService }) => {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  return (
+    <div className="flex flex-col items-start rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:shadow-md">
+      <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-indigo-100/80">
+        {service.thumbnail ? (
+          <StrapiImage
+            src={service.thumbnail.url}
+            alt={service.thumbnail.alternativeText || service.title}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <img className="h-7 w-7" src={defaultIcon} alt={service.title} />
+        )}
+      </div>
+      <h3 className="mt-6 text-xl font-bold text-slate-900">
+        {service.title}
+      </h3>
+      <p className="mt-3 leading-relaxed text-slate-600">
+        {service.short_description}
+      </p>
+
+      {isExpanded && (
+        <p className="mt-2 leading-relaxed text-slate-500">
+          Want to know more about how our {service.title.toLowerCase()} service
+          can help your business grow? Reach out to our team for a free
+          consultation tailored to your needs.
+        </p>
+      )}
+
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="mt-4 flex items-center gap-1 text-sm font-semibold text-indigo-600 hover:text-indigo-800"
+      >
+        {isExpanded ? 'Show Less' : 'Learn More'}
+        <span className={`transition-transform ${isExpanded ? 'rotate-90' : ''}`}>
+          →
+        </span>
+      </button>
+    </div>
   )
 }
