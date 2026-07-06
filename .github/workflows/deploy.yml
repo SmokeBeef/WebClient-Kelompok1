@@ -20,7 +20,8 @@ jobs:
           echo "${{ secrets.ENV_CMS }}" > ./cms/.env
 
           # Compose interpolates ${DATABASE_*} for the Postgres service from a project .env file.
-          grep -E '^DATABASE_' ./cms/.env > .env
+          # grep -E '^DATABASE_' ./cms/.env > .env
+          echo "${{ secrets.ENV_GLOBAL }}" > .env
 
       - name: Build docker images
         env:
