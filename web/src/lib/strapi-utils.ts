@@ -4,9 +4,9 @@ import { env } from '#/env'
 export function getStrapiURL(): string {
   // Handle SSR where import.meta.env might not be fully available
   if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_STRAPI_DEPLOYED_URL) {
-    return env.VITE_STRAPI_DEPLOYED_URL
+    return env.VITE_STRAPI_DEPLOYED_URL || env.VITE_STRAPI_URL
   }
-  return env.STRAPI_DEPLOYED_URL
+  return env.STRAPI_DEPLOYED_URL || env.STRAPI_URL
 }
 
 // Get full URL for media assets

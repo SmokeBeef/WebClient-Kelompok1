@@ -17,6 +17,8 @@ services:
       VITE_STRAPI_URL: ${VITE_STRAPI_URL:-http://strapi:1337}
       STRAPI_URL: ${STRAPI_URL:-http://strapi:1337}
       STRAPI_API_TOKEN: ${STRAPI_API_TOKEN:-here-you-go}
+      STRAPI_DEPLOYED_URL: ${STRAPI_DEPLOYED_URL:-http://localhost:1337}
+      VITE_STRAPI_DEPLOYED_URL: ${VITE_STRAPI_DEPLOYED_URL:-http://localhost:1337}
     ports:
       - "127.0.0.1:3030:3030"
     networks:
