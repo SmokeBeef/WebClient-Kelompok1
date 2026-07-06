@@ -1,10 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Mail, MapPin, Phone } from 'lucide-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
 
 import { Button } from '#/components/ui/button.tsx'
 import { Input } from '#/components/ui/input.tsx'
 import { Label } from '#/components/ui/label.tsx'
 import { Textarea } from '#/components/ui/textarea.tsx'
+import { strapiApi } from '@/data/loaders'
 
 export const Route = createFileRoute('/contact')({
   component: RouteComponent,
@@ -29,6 +32,44 @@ const contactInfo = [
 ]
 
 function RouteComponent() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    const first_name = String(formData.get('first_name') ?? '').trim()
+    const last_name = String(formData.get('last_name') ?? '').trim()
+    const email = String(formData.get('email') ?? '').trim()
+    const message = String(formData.get('message') ?? '').trim()
+
+    if (!first_name || !email || !message) {
+      toast.error('Please fill in all required fields.')
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      await strapiApi.contactForms.submitContactFormData({
+        data: {
+          first_name,
+          last_name: last_name || undefined,
+          email,
+          message,
+        },
+      })
+
+      toast.success('Message sent successfully!')
+      form.reset()
+    } catch {
+      toast.error('Failed to send message. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section className="container mx-auto px-4 py-12 sm:py-16 lg:py-24">
       <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
@@ -58,34 +99,55 @@ function RouteComponent() {
           </div>
         </div>
 
-        <form className="flex flex-col gap-4 rounded-xl border border-border bg-muted/20 p-6 sm:p-8">
+        <form
+          className="flex flex-col gap-4 rounded-xl border border-border bg-muted/20 p-6 sm:p-8"
+          onSubmit={handleSubmit}
+        >
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="flex flex-col gap-2">
               <Label htmlFor="first-name">First Name</Label>
-              <Input id="first-name" placeholder="Jane" />
+              <Input
+                id="first-name"
+                name="first_name"
+                placeholder="Jane"
+                required
+              />
             </div>
             <div className="flex flex-col gap-2">
               <Label htmlFor="last-name">Last Name</Label>
-              <Input id="last-name" placeholder="Doe" />
+              <Input id="last-name" name="last_name" placeholder="Doe" />
             </div>
           </div>
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" type="email" placeholder="jane@example.com" />
+            <Input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="jane@example.com"
+              required
+            />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label htmlFor="message">Message</Label>
             <Textarea
               id="message"
+              name="message"
               placeholder="How can we help you?"
               className="min-h-32"
+              required
             />
           </div>
 
-          <Button type="submit" size="lg" className="mt-2 w-full">
-            Send Message
+          <Button
+            type="submit"
+            size="lg"
+            className="mt-2 w-full"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
           </Button>
         </form>
       </div>

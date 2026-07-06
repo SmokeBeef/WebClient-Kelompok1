@@ -1,20 +1,21 @@
-import { createEnv } from '@t3-oss/env-core'
-import { z } from 'zod'
+import { createEnv } from "@t3-oss/env-core";
+import { z } from "zod";
 
 export const env = createEnv({
   server: {
     SERVER_URL: z.url().optional(),
-    STRAPI_URL: z.url().default('http://localhost:1337'),
+    STRAPI_URL: z.url().default("heyyy"),
+    STRAPI_API_TOKEN: z.string().optional(),
   },
 
   /**
    * The prefix that client-side variables must have. This is enforced both at
    * a type-level and at runtime.
    */
-  clientPrefix: 'VITE_',
+  clientPrefix: "VITE_",
 
   client: {
-    VITE_STRAPI_URL: z.url().default('http://localhost:1337'),
+    VITE_STRAPI_URL: z.url().default("http://localhost:1337"),
   },
 
   /**
@@ -37,4 +38,4 @@ export const env = createEnv({
    * explicitly specify this option as true.
    */
   emptyStringAsUndefined: true,
-})
+});
