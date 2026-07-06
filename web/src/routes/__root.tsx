@@ -14,8 +14,6 @@ import appCss from "../styles.css?url";
 import varsCss from "../css/vars.css?url";
 import figmaCss from "../css/style.css?url";
 
-console.log({ process: process.env, meta: import.meta.env });
-
 export const Route = createRootRoute({
   component: RootLayout,
   head: () => ({

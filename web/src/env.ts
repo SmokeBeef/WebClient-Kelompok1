@@ -3,9 +3,8 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    SERVER_URL: z.url().optional(),
-    STRAPI_URL: z.url().default("heyyy"),
-    STRAPI_API_TOKEN: z.string().optional(),
+    STRAPI_URL: z.url().default("http://localhost:1338"),
+    STRAPI_API_TOKEN: z.string()
   },
 
   /**
@@ -13,16 +12,20 @@ export const env = createEnv({
    * a type-level and at runtime.
    */
   clientPrefix: "VITE_",
-
   client: {
-    VITE_STRAPI_URL: z.url().default("http://localhost:1337"),
+    VITE_STRAPI_URL: z.url().default("http://localhost:1338"),
   },
 
   /**
    * What object holds the environment variables at runtime. This is usually
    * `process.env` or `import.meta.env`.
    */
-  runtimeEnv: import.meta.env,
+  // runtimeEnv: import.meta.env,
+  runtimeEnvStrict: {
+    STRAPI_URL: process.env.STRAPI_URL,
+    STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN,
+    VITE_STRAPI_URL: import.meta.env.VITE_STRAPI_URL,
+  },
 
   /**
    * By default, this library will feed the environment variables directly to
